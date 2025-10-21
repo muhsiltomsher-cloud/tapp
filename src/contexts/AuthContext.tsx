@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import { IUser, LoginRequest, RegisterRequest, AuthResponse } from '@/types';
+import { IUser, LoginRequest, RegisterRequest, AuthResponse, UserRole } from '@/types';
 
 interface AuthContextType {
   user: Omit<IUser, 'password'> | null;
@@ -40,14 +40,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === 'true';
     
     if (isDemoMode) {
-      const mockUser = {
+      const mockUser: Omit<IUser, 'password'> = {
         _id: 'demo-user-id',
         name: 'Demo User',
         email: credentials.email,
-        role: 'ADMIN',
+        role: UserRole.ADMIN,
         isActive: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
       };
       const mockToken = 'demo-token-' + Date.now();
       
@@ -90,14 +90,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === 'true';
     
     if (isDemoMode) {
-      const mockUser = {
+      const mockUser: Omit<IUser, 'password'> = {
         _id: 'demo-user-id',
         name: data.name,
         email: data.email,
-        role: data.role || 'CLIENT_USER',
+        role: (data.role as UserRole) || UserRole.CLIENT_USER,
         isActive: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
       };
       const mockToken = 'demo-token-' + Date.now();
       
