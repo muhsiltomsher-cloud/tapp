@@ -69,7 +69,30 @@ NEXT_PUBLIC_SOCKET_URL=http://localhost:3000
 NODE_ENV=development
 ```
 
-## Getting Started
+## Demo Mode (Quick UI Testing)
+
+Want to test the UI without setting up MongoDB or WhatsApp API? Enable demo mode:
+
+1. Add to your `.env.local`:
+```env
+NEXT_PUBLIC_DEMO_MODE=true
+```
+
+2. Start the development server:
+```bash
+npm run dev
+```
+
+3. Login with **ANY** email and password at [http://localhost:3000/login](http://localhost:3000/login)
+
+**Demo Credentials (for reference):**
+- Email: `demo@example.com`
+- Password: `demo123`
+- Or use ANY email/password combination - all will work in demo mode!
+
+**Note:** Demo mode bypasses authentication and database - it's only for UI testing. No data is saved.
+
+## Getting Started (Full Setup)
 
 1. Start the development server:
 ```bash
